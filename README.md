@@ -16,4 +16,4 @@ A machine learning project to detect fraudulent transactions using simulated tra
 
 ## 👨‍💻 Author
 Syed Hussain Abdul Hakeem  
-ML Intern, Unified Mentor Internship
+Unified Mentor Internship
