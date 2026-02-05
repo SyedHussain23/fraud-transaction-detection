@@ -15,5 +15,4 @@ A machine learning project to detect fraudulent transactions using simulated tra
 - Evaluated using confusion matrix, accuracy, precision, recall
 
 ## 👨‍💻 Author
-Syed Hussain Abdul Hakeem  
-Unified Mentor Internship
+Syed Hussain Abdul Hakeem
