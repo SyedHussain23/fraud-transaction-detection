@@ -121,6 +121,7 @@ git clone https://github.com/SyedHussain23/fraud-transaction-detection.git
 cd fraud-transaction-detection
 pip install pandas numpy scikit-learn matplotlib seaborn jupyter
 jupyter notebook fraud_detection.ipynb
+```
 
 ---
 
