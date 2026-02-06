@@ -1,6 +1,7 @@
 # 💳 Fraud Transaction Detection
 
-A machine learning project to detect fraudulent transactions using simulated transaction data from daily `.pkl` files (April 2018).
+Fraud detection is a high-impact, real-world ML problem involving extreme class imbalance, temporal patterns, and cost-sensitive errors.
+This project demonstrates an end-to-end, production-style machine learning workflow using simulated transaction data from daily `.pkl` files (April 2018).
 
 ---
 
@@ -35,8 +36,8 @@ Extracted from transaction timestamps:
 - Week of year, month, year
 
 ### Behavioral (Velocity) Features
-- Transaction count per customer
-- Transaction count per terminal
+- Rolling transaction count per customer (behavioral velocity)
+- Rolling transaction count per terminal (location risk signal)
 
 These velocity features help identify unusual transaction frequencies that may indicate fraud.
 
@@ -72,11 +73,11 @@ Jupyter Notebook
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/fraud-transaction-detection.git
+git clone https://github.com/SyedHussain23/fraud-transaction-detection.git
 cd fraud-transaction-detection
 
 # Install required packages
-pip install pandas numpy scikit-learn matplotlib seaborn jupyter
+pip install pandas numpy scikit-learn matplotlib jupyter
 ```
 
 ### Required Libraries
