@@ -1,30 +1,33 @@
 # 💳 Fraud Transaction Detection
 
-Fraud detection is a high-impact, real-world ML problem involving extreme class imbalance, temporal patterns, and cost-sensitive errors.
-This project demonstrates an end-to-end, production-style machine learning workflow using simulated transaction data from daily `.pkl` files (April 2018).
+Fraud detection is a real-world machine learning problem characterized by **extreme class imbalance**, **temporal patterns**, and **cost-sensitive decision making**.  
+This project demonstrates an end-to-end ML workflow for detecting fraudulent transactions using simulated financial data.
 
 ---
 
-## 📁 Repository Files
+## 📌 Project Overview
 
-- **`fraud_detection.ipynb`**: Complete end-to-end implementation including data loading, exploratory analysis, feature engineering, model training, and evaluation
+- **Problem Type:** Binary classification (Fraud vs Legitimate)
+- **Domain:** Financial transactions
+- **Challenge:** Fraud rate of only ~0.03%
+- **Goal:** Identify suspicious transactions and assign fraud probability scores
 
 ---
 
 ## 📊 Dataset
 
-### Overview
-- **Format**: 30 separate `.pkl` files (one file per day of April 2018)
-- **Total Records**: 288,000+ transactions after combining all daily files
-- **Class Imbalance**: Fraudulent transactions represent only ~0.03% of total data
+- **Source:** Simulated transaction dataset
+- **Format:** Daily `.pkl` files (April 2018)
+- **Total Records:** 288,000+
+- **Fraud Rate:** ~0.03%
 
-### Key Features
-- `TRANSACTION_ID`: Unique transaction identifier
-- `TX_DATETIME`: Transaction timestamp
-- `CUSTOMER_ID`: Customer identifier
-- `TERMINAL_ID`: Terminal/location identifier
-- `TX_AMOUNT`: Transaction amount
-- `TX_FRAUD`: Target variable (0 = legitimate, 1 = fraudulent)
+### Key Columns
+- `TRANSACTION_ID`
+- `TX_DATETIME`
+- `CUSTOMER_ID`
+- `TERMINAL_ID`
+- `TX_AMOUNT`
+- `TX_FRAUD` (target variable)
 
 ---
 
@@ -32,103 +35,101 @@ This project demonstrates an end-to-end, production-style machine learning workf
 
 ### Temporal Features
 Extracted from transaction timestamps:
-- Hour of day, day of week, day of month
-- Week of year, month, year
+- Hour of day
+- Day of week
+- Day of month
+- Week of year
+- Month and year
 
 ### Behavioral (Velocity) Features
-- Rolling transaction count per customer (behavioral velocity)
-- Rolling transaction count per terminal (location risk signal)
+- Total transaction count per customer
+- Total transaction count per terminal  
 
-These velocity features help identify unusual transaction frequencies that may indicate fraud.
-
----
-
-## 🧠 Machine Learning Model
-
-### Model: Random Forest Classifier
-- **Algorithm**: Ensemble learning with 100 decision trees
-- **Class Balancing**: Applied `class_weight='balanced'` to handle extreme class imbalance
-- **Pipeline**: Includes StandardScaler and OneHotEncoder for preprocessing
-
-### Evaluation Metrics
-- **Confusion Matrix**: Detailed breakdown of predictions vs actual values
-- **Accuracy**: Overall correctness of predictions
-- **Precision**: Accuracy of fraud predictions
-- **Recall**: Ability to catch actual fraud cases
-- **ROC-AUC Score**: Model's discrimination ability
-
-### Output
-Each transaction receives a `predicted_fraud_probability` score (0-1) indicating likelihood of fraud.
+These features help capture abnormal transaction frequency patterns.
 
 ---
 
-## 🛠️ Setup & Requirements
+## 🧠 Modeling Approach
 
-### Prerequisites
-```bash
-Python 3.8+
-Jupyter Notebook
-```
+### Models Trained
 
-### Installation
+**Logistic Regression**
+- Baseline model
+- Trained with and without `class_weight='balanced'`
+
+**Random Forest Classifier**
+- 100 trees
+- `class_weight='balanced'`
+- Used for probability-based fraud scoring
+
+### Preprocessing Pipeline
+- Numerical features scaled using `StandardScaler`
+- Categorical features encoded using `OneHotEncoder`
+- Unified pipeline using `ColumnTransformer`
+
+---
+
+## ⚖️ Handling Class Imbalance
+
+- Stratified train-test split (80/20)
+- Class weights applied to penalize misclassification of fraud cases
+- Evaluation focused on **recall, precision, and ROC-AUC**, not accuracy
+
+---
+
+## 📈 Evaluation & Results
+
+### Key Observations
+- Accuracy is misleading due to extreme class imbalance
+- Models achieve high accuracy by correctly classifying legitimate transactions
+- Fraud recall remains low due to very limited fraud samples in the test set
+- Random Forest assigns non-zero fraud probability scores, enabling threshold-based risk control
+
+### Metrics Used
+- Confusion Matrix
+- Precision & Recall
+- ROC-AUC
+- Predicted fraud probabilities
+
+---
+
+## 🔍 Threshold & Risk Analysis
+
+- Fraud probabilities analyzed instead of hard labels
+- Custom thresholds (e.g., 0.1) tested to study recall–precision trade-offs
+- High-amount transactions (`TX_AMOUNT > 220`) analyzed as a known risk rule
+- Demonstrates how ML models can support rule-based fraud detection systems
+
+---
+
+## 🛠️ Tech Stack
+
+| Tool | Purpose |
+|-----|--------|
+| Python | Programming |
+| Pandas / NumPy | Data processing |
+| Scikit-learn | Modeling & pipelines |
+| Matplotlib / Seaborn | Visualization |
+| Jupyter Notebook | Experimentation |
+
+---
+
+## 🚀 How to Run
+
 ```bash
-# Clone the repository
 git clone https://github.com/SyedHussain23/fraud-transaction-detection.git
 cd fraud-transaction-detection
-
-# Install required packages
-pip install pandas numpy scikit-learn matplotlib jupyter
-```
-
-### Required Libraries
-- **pandas**: Data manipulation
-- **scikit-learn**: Machine learning algorithms
-- **matplotlib & seaborn**: Data visualization
-- **zipfile & os**: File handling
-
----
-
-## 🚀 Usage
-
-1. Place your `dataset.zip` (containing 30 .pkl files) in the project root
-2. Open Jupyter Notebook:
-   ```bash
-   jupyter notebook fraud_detection.ipynb
-   ```
-3. Run all cells to execute the complete pipeline
-
----
-
-## 📈 Project Workflow
-
-1. **Data Loading**: Extract and combine 30 daily `.pkl` files from `dataset.zip`
-2. **Exploratory Analysis**: Check for missing values, data types, and class distribution
-3. **Feature Engineering**: Create temporal and behavioral features
-4. **Preprocessing**: Scale numerical features and encode categorical variables
-5. **Model Training**: Train Random Forest Classifier with balanced class weights
-6. **Evaluation**: Generate predictions and assess performance using multiple metrics
-
----
-
-## 💻 Technologies Used
-
-| Technology | Purpose |
-|------------|---------|
-| Python 3.8+ | Programming language |
-| Pandas | Data manipulation |
-| Scikit-learn | Machine learning |
-| Matplotlib/Seaborn | Visualization |
-| Jupyter Notebook | Development environment |
+pip install pandas numpy scikit-learn matplotlib seaborn jupyter
+jupyter notebook fraud_detection.ipynb
 
 ---
 
 ## 🔮 Future Improvements
-
-- [ ] Implement SMOTE for better class balance handling
-- [ ] Add XGBoost and compare performance
-- [ ] Create real-time fraud detection API
-- [ ] Develop interactive dashboard
-- [ ] Add feature importance analysis
+- Time-windowed velocity features
+- SMOTE or cost-sensitive learning
+- Gradient Boosting / XGBoost comparison
+- Feature importance analysis
+- Real-time fraud scoring API
 
 ---
 
@@ -150,5 +151,3 @@ This project is open source and available under the MIT License.
 ## ⭐ Show Your Support
 
 Give a ⭐️ if this project helped you!
-
----
