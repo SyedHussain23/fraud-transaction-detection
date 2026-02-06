@@ -135,9 +135,10 @@ jupyter notebook fraud_detection.ipynb
 
 ## 👨‍💻 Author
 
-Syed Hussain Abdul Hakeem
-LinkedIn: https://www.linkedin.com/in/syed-hussain-abdul-hakeem
-GitHub: https://github.com/SyedHussain23
+**Syed Hussain Abdul Hakeem**
+
+- LinkedIn: https://www.linkedin.com/in/syed-hussain-abdul-hakeem
+- GitHub: https://github.com/SyedHussain23
 
 ---
 
@@ -149,4 +150,4 @@ This project is open source and available under the MIT License.
 
 ## ⭐ Show Your Support
 
-Give a ⭐️ if this project helped you!
+If you found this project useful, consider giving it a ⭐.
