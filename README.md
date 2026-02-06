@@ -135,10 +135,9 @@ jupyter notebook fraud_detection.ipynb
 
 ## 👨‍💻 Author
 
-**Syed Hussain Abdul Hakeem**
-
-- LinkedIn: https://www.linkedin.com/in/syed-hussain-abdul-hakeem
-- GitHub: https://github.com/SyedHussain23
+Syed Hussain Abdul Hakeem
+LinkedIn: https://www.linkedin.com/in/syed-hussain-abdul-hakeem
+GitHub: https://github.com/SyedHussain23
 
 ---
 
