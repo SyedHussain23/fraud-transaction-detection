@@ -105,7 +105,7 @@ These features help capture abnormal transaction frequency patterns.
 ## 🛠️ Tech Stack
 
 | Tool | Purpose |
-|-----|--------|
+|------|--------|
 | Python | Programming |
 | Pandas / NumPy | Data processing |
 | Scikit-learn | Modeling & pipelines |
